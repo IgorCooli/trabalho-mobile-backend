@@ -28,6 +28,9 @@ public class Heroi {
     @Column(name = "alter_ego")
     private String alterEgo;
 
+    @Column(name = "url_imagem")
+    private String urlImagem;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
     private Status status;
