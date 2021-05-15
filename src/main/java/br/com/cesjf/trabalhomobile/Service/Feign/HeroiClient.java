@@ -1,5 +1,6 @@
 package br.com.cesjf.trabalhomobile.Service.Feign;
 
+import br.com.cesjf.trabalhomobile.Model.Dto.HeroiDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
