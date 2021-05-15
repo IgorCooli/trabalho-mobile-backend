@@ -21,4 +21,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             + "and u.senha = :senha"
     )
     public UsuarioDto logar(@Param("email") String email, @Param("senha") String senha);
+
+
 }

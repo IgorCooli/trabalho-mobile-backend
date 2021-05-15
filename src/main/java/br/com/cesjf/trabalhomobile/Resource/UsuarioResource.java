@@ -1,5 +1,6 @@
 package br.com.cesjf.trabalhomobile.Resource;
 
+import br.com.cesjf.trabalhomobile.Model.Dto.CadastroDto;
 import br.com.cesjf.trabalhomobile.Model.Dto.LoginDto;
 import br.com.cesjf.trabalhomobile.Model.Dto.UsuarioDto;
 import br.com.cesjf.trabalhomobile.Service.UsuarioService;
@@ -20,7 +21,15 @@ public class UsuarioResource {
 
     @PostMapping("/logar")
     public ResponseEntity<?> login(@RequestBody LoginDto login){
-        return ResponseEntity.status(HttpStatus.OK).body(service.logar(login));
+        UsuarioDto response = service.logar(login);
+        return response != null ?
+                ResponseEntity.status(HttpStatus.OK).body(response)
+                : ResponseEntity.status(HttpStatus.FORBIDDEN).body("Não foi possível logar!");
+    }
+
+    @PostMapping("/cadastrar")
+    public ResponseEntity<?> cadastrar(CadastroDto cadastro){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrar(cadastro));
     }
 
 }
