@@ -28,8 +28,11 @@ public class UsuarioResource {
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> cadastrar(CadastroDto cadastro){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrar(cadastro));
+    public ResponseEntity<?> cadastrar(@RequestBody CadastroDto cadastro){
+        Boolean cadastrou = service.cadastrar(cadastro);
+        return cadastrou ?
+                ResponseEntity.status(HttpStatus.CREATED).body(cadastrou)
+                : ResponseEntity.status(HttpStatus.CONFLICT).body(cadastrou);
     }
 
 }
