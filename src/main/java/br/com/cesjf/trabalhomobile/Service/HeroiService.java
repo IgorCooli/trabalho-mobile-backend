@@ -18,8 +18,7 @@ public class HeroiService {
     HeroiClient heroiClient;
 
     public List<HeroiDto> buscarPorNomeAPI(String nome){
-        LinkedHashMap retorno = (LinkedHashMap) heroiClient.buscarPorNome(nome);
-        return HeroiApiMapper.mapper(retorno);
+        return HeroiApiMapper.mapper(heroiClient.buscarPorNome(nome));
     }
 
 }

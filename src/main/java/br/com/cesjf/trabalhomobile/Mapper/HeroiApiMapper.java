@@ -8,8 +8,9 @@ import java.util.List;
 
 public class HeroiApiMapper {
 
-    public static List<HeroiDto> mapper(LinkedHashMap raw){
-        ArrayList<LinkedHashMap> hash = (ArrayList) raw.get("results");
+    public static List<HeroiDto> mapper(Object raw){
+        LinkedHashMap result = (LinkedHashMap) raw;
+        ArrayList<LinkedHashMap> hash = (ArrayList) result.get("results");
         List<HeroiDto> lista = new ArrayList<>();
         try {
             hash.stream().forEach( obj -> {
