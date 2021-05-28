@@ -27,4 +27,11 @@ public class Favorito {
     @JoinColumn(name = "heroi_id")
     private Heroi heroi;
 
+    public static Favorito create(Usuario usuario, Heroi heroi){
+        Favorito favorito = new Favorito();
+        favorito.setUsuario(usuario);
+        favorito.setHeroi(heroi);
+        return favorito;
+    }
+
 }

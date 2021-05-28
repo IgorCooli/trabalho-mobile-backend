@@ -20,4 +20,9 @@ public class HeroiResource {
         return heroiService.buscarPorNomeAPI(nome);
     }
 
+    @GetMapping("/buscar-por-id-api/{idApi}")
+    public HeroiDto buscarPorIdApi(@PathVariable String idApi){
+        return heroiService.buscarPorIdApi(idApi);
+    }
+
 }

@@ -8,42 +8,37 @@ import java.util.List;
 
 public class HeroiApiMapper {
 
-    public static List<HeroiDto> mapper(Object raw){
+    public static HeroiDto mapper(Object raw){
         LinkedHashMap result = (LinkedHashMap) raw;
-        ArrayList<LinkedHashMap> hash = (ArrayList) result.get("results");
-        List<HeroiDto> lista = new ArrayList<>();
         try {
-            hash.stream().forEach( obj -> {
-                HeroiDto dto = new HeroiDto();
-                dto.setIdApi((String) obj.get("id"));
-                dto.setNome((String) obj.get("name"));
+            HeroiDto dto = new HeroiDto();
+            dto.setIdApi((String) result.get("id"));
+            dto.setNome((String) result.get("name"));
 
-                LinkedHashMap biography = (LinkedHashMap) obj.get("biography");
-                dto.setAlterEgo((String) biography.get("full-name"));
+            LinkedHashMap biography = (LinkedHashMap) result.get("biography");
+            dto.setAlterEgo((String) biography.get("full-name"));
 
-                LinkedHashMap image = (LinkedHashMap) obj.get("image");
-                dto.setUrlImagem((String) image.get("url"));
+            LinkedHashMap image = (LinkedHashMap) result.get("image");
+            dto.setUrlImagem((String) image.get("url"));
 
-                LinkedHashMap appearance = (LinkedHashMap) obj.get("appearance");
-                ArrayList tipoAltura = (ArrayList) appearance.get("height");
-                ArrayList tipoPeso = (ArrayList) appearance.get("weight");
-                dto.setAltura((String) tipoAltura.get(1));
-                dto.setPeso((String) tipoPeso.get(1));
+            LinkedHashMap appearance = (LinkedHashMap) result.get("appearance");
+            ArrayList tipoAltura = (ArrayList) appearance.get("height");
+            ArrayList tipoPeso = (ArrayList) appearance.get("weight");
+            dto.setAltura((String) tipoAltura.get(1));
+            dto.setPeso((String) tipoPeso.get(1));
 
-                LinkedHashMap powerStats = (LinkedHashMap) obj.get("powerstats");
-                dto.setInteligencia((String) powerStats.get("intelligence"));
-                dto.setForca((String) powerStats.get("strength"));
-                dto.setVelocidade((String) powerStats.get("speed"));
-                dto.setResistencia((String) powerStats.get("durability"));
-                dto.setPoder((String) powerStats.get("power"));
-                dto.setCombate((String) powerStats.get("combat"));
+            LinkedHashMap powerStats = (LinkedHashMap) result.get("powerstats");
+            dto.setInteligencia((String) powerStats.get("intelligence"));
+            dto.setForca((String) powerStats.get("strength"));
+            dto.setVelocidade((String) powerStats.get("speed"));
+            dto.setResistencia((String) powerStats.get("durability"));
+            dto.setPoder((String) powerStats.get("power"));
+            dto.setCombate((String) powerStats.get("combat"));
 
-                lista.add(dto);
-            });
+            return dto;
         }catch (Exception e){
-            return new ArrayList<>();
+            return new HeroiDto();
         }
-        return lista;
     }
 
 }

@@ -11,4 +11,8 @@ public interface HeroiClient {
     @GetMapping(value = "/search/{nome}", produces = "application/json")
     Object buscarPorNome(@PathVariable String nome);
 
+
+    @GetMapping(value = "/{idApi}", produces = "application/json")
+    Object buscarPorIdAPi(@PathVariable String idApi);
+
 }

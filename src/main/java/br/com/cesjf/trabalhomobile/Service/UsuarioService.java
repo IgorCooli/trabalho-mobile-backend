@@ -26,4 +26,8 @@ public class UsuarioService {
         }
         return Boolean.valueOf(true);
     }
+
+    public Usuario findById(Long id){
+        return repository.findById(id).get();
+    }
 }

@@ -1,5 +1,6 @@
 package br.com.cesjf.trabalhomobile.Model;
 
+import br.com.cesjf.trabalhomobile.Model.Dto.HeroiDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,5 +38,24 @@ public class Heroi {
 
     @OneToMany(mappedBy = "heroi")
     private List<Favorito> favoritos;
+
+    public static Heroi create(HeroiDto dto){
+        Heroi heroi = new Heroi();
+        Status status = new Status();
+        heroi.setAlterEgo(dto.getAlterEgo());
+        heroi.setIdApi(Long.valueOf(dto.getIdApi()));
+        heroi.setNome(dto.getNome());
+        heroi.setUrlImagem(dto.getUrlImagem());
+        status.setAltura(dto.getAltura());
+        status.setCombate(Integer.parseInt(dto.getCombate()));
+        status.setForca(Integer.parseInt(dto.getForca()));
+        status.setInteligencia(Integer.parseInt(dto.getInteligencia()));
+        status.setPeso(dto.getPeso());
+        status.setPoder(Integer.parseInt(dto.getPoder()));
+        status.setResistencia(Integer.parseInt(dto.getResistencia()));
+        status.setVelocidade(Integer.parseInt(dto.getVelocidade()));
+        heroi.setStatus(status);
+        return heroi;
+    }
 
 }
