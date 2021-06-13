@@ -1,6 +1,7 @@
 package br.com.cesjf.trabalhomobile.Service;
 
 import br.com.cesjf.trabalhomobile.Model.Dto.FavoritarDto;
+import br.com.cesjf.trabalhomobile.Model.Dto.FavoritoExcluirDto;
 import br.com.cesjf.trabalhomobile.Model.Dto.HeroiDto;
 import br.com.cesjf.trabalhomobile.Model.Favorito;
 import br.com.cesjf.trabalhomobile.Model.Heroi;
@@ -44,6 +45,17 @@ public class FavoritoService {
         lista.forEach(heroi -> {
             retorno.add(HeroiDto.create(heroi));
         });
+        return retorno;
+    }
+
+    public Boolean excluir(FavoritoExcluirDto dto) {
+        Boolean retorno = true;
+        try {
+            Favorito favorito = repository.buscarPorUsuarioEHeroi(dto.getHeroiId(), dto.getUsuarioId());
+            repository.delete(favorito);
+        }catch (Exception e){
+            retorno = false;
+        }
         return retorno;
     }
 }

@@ -25,4 +25,12 @@ public interface FavoritoRepository extends JpaRepository<Favorito, Long> {
             + "where f.usuario.id = :usuarioId "
     )
     public List<Heroi> listar(@Param("usuarioId") Long usuarioId);
+
+    @Query("select new br.com.cesjf.trabalhomobile.Model.Favorito" +
+            "(f.id,f.usuario, f.heroi) " +
+            "from Favorito f " +
+            "where f.usuario.id = :usuarioId " +
+            "and f.heroi.id = :heroiId"
+    )
+    Favorito buscarPorUsuarioEHeroi(@Param("heroiId") Long heroiId, @Param("usuarioId") Long usuarioId);
 }
