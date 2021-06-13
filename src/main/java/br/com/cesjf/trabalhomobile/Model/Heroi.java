@@ -39,6 +39,15 @@ public class Heroi {
     @OneToMany(mappedBy = "heroi")
     private List<Favorito> favoritos;
 
+    public Heroi(Long id, Long idApi, String nome, String alterEgo, String urlImagem, Status status){
+        this.id = id;
+        this.idApi = idApi;
+        this.nome = nome;
+        this.alterEgo = alterEgo;
+        this.urlImagem = urlImagem;
+        this.status = status;
+    }
+
     public static Heroi create(HeroiDto dto){
         Heroi heroi = new Heroi();
         Status status = new Status();

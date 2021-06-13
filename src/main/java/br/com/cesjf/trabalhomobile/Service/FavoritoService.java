@@ -8,6 +8,9 @@ import br.com.cesjf.trabalhomobile.Repository.FavoritoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class FavoritoService {
 
@@ -33,5 +36,14 @@ public class FavoritoService {
             return false;
         }
         return true;
+    }
+
+    public List<HeroiDto> listar(Long usuarioId) {
+        List<Heroi> lista = repository.listar(usuarioId);
+        List<HeroiDto> retorno = new ArrayList<>();
+        lista.forEach(heroi -> {
+            retorno.add(HeroiDto.create(heroi));
+        });
+        return retorno;
     }
 }

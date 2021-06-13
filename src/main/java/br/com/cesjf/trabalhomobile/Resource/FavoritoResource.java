@@ -1,11 +1,14 @@
 package br.com.cesjf.trabalhomobile.Resource;
 
 import br.com.cesjf.trabalhomobile.Model.Dto.FavoritarDto;
+import br.com.cesjf.trabalhomobile.Model.Dto.HeroiDto;
 import br.com.cesjf.trabalhomobile.Service.FavoritoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/myhero/favoritos")
@@ -21,6 +24,12 @@ public class FavoritoResource {
         return response ?
                 ResponseEntity.status(HttpStatus.CREATED).body(response)
                 : ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(response);
+    }
+
+    @GetMapping("/listar/{usuarioId}")
+    public List<HeroiDto> listar(@PathVariable Long usuarioId){
+        List<HeroiDto> lista = service.listar(usuarioId);
+        return lista;
     }
 
 }
