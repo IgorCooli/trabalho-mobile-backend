@@ -11,7 +11,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-@Table(name = "favorito_tb")
+@Table(name = "favorito_tb",
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {"usuario_id", "heroi_id"})
+        })
 public class Favorito {
 
     @Id
