@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/myhero/usuario")
 @CrossOrigin
@@ -31,6 +33,14 @@ public class UsuarioResource {
         return cadastrou ?
                 ResponseEntity.status(HttpStatus.CREATED).body(cadastrou)
                 : ResponseEntity.status(HttpStatus.CONFLICT).body(cadastrou);
+    }
+
+    @GetMapping("/buscar/{usuario}")
+    public ResponseEntity<List<UsuarioDto>> buscar(@PathVariable String usuario){
+        List<UsuarioDto> respose = service.buscarUsuario(usuario);
+        return respose.size() > 0 ?
+               ResponseEntity.status(HttpStatus.OK).body(respose)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(respose);
     }
 
 }

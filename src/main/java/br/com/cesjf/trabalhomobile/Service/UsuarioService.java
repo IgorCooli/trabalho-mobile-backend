@@ -8,6 +8,8 @@ import br.com.cesjf.trabalhomobile.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -29,5 +31,9 @@ public class UsuarioService {
 
     public Usuario findById(Long id){
         return repository.findById(id).get();
+    }
+
+    public List<UsuarioDto> buscarUsuario(String usuario) {
+        return repository.findByNomeUsuario(usuario);
     }
 }

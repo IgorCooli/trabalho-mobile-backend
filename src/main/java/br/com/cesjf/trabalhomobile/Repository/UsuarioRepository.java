@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @Repository
@@ -20,7 +21,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             + "where u.email = :email "
             + "and u.senha = :senha"
     )
-    public UsuarioDto logar(@Param("email") String email, @Param("senha") String senha);
+    UsuarioDto logar(@Param("email") String email, @Param("senha") String senha);
 
-
+    @Query("select new br.com.cesjf.trabalhomobile.Model.Dto.UsuarioDto"
+            + "(u.id, u.nomeCompleto,u.nomeUsuario) "
+            + "from Usuario u "
+            + "where u.nomeUsuario like %:usuario%"
+    )
+    List<UsuarioDto> findByNomeUsuario(String usuario);
 }
