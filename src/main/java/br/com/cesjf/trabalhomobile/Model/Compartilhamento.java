@@ -1,8 +1,11 @@
 package br.com.cesjf.trabalhomobile.Model;
 
+import br.com.cesjf.trabalhomobile.Model.Dto.CompartilhamentoDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -11,7 +14,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-@Table(name = "compartilhamento_tb")
+@Table(name = "compartilhamento_tb",
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {"usuario_envio_id", "usuario_recebimento_id", "heroi_id"})
+        })
 public class Compartilhamento {
 
     @Id
@@ -30,5 +36,17 @@ public class Compartilhamento {
     @ManyToOne
     @JoinColumn(name = "heroi_id")
     private Heroi heroi;
+
+    @Column(name = "data_operacao")
+    private Timestamp dataOperação;
+
+    public static Compartilhamento create(Usuario usuarioEnvio, Usuario usuarioRecebimento, Heroi heroi){
+        Compartilhamento model = new Compartilhamento();
+        model.setDataOperação(Timestamp.valueOf(LocalDateTime.now()));
+        model.setHeroi(heroi);
+        model.setUsuarioEnvio(usuarioEnvio);
+        model.setUsuarioRecebimento(usuarioRecebimento);
+        return model;
+    }
 
 }
