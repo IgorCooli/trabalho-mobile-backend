@@ -28,5 +28,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             + "from Usuario u "
             + "where u.nomeUsuario like %:usuario%"
     )
-    List<UsuarioDto> findByNomeUsuario(String usuario);
+    List<UsuarioDto> findByUsuario(String usuario);
+
+    Usuario findByNomeUsuario(String usuarioRecebimentoNome);
 }

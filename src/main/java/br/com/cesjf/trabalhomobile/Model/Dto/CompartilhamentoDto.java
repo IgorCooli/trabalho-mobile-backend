@@ -12,7 +12,7 @@ import lombok.Setter;
 public class CompartilhamentoDto {
 
     private Long usuarioEnvioId;
-    private Long usuarioRecebimentoId;
+    private String usuarioRecebimentoNome;
     private String idHeroiApi;
 
 }

@@ -38,7 +38,7 @@ public class CompartilhamentoService {
 
         try {
             usuarioEnvio = usuarioService.findById(compartilhamento.getUsuarioEnvioId());
-            usuarioRecebimento = usuarioService.findById(compartilhamento.getUsuarioRecebimentoId());
+            usuarioRecebimento = usuarioService.findByNomeUsuario(compartilhamento.getUsuarioRecebimentoNome());
         } catch (Exception e) {
             return false;
         }

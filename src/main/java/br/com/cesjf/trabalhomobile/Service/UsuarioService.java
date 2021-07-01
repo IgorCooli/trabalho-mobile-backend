@@ -34,6 +34,10 @@ public class UsuarioService {
     }
 
     public List<UsuarioDto> buscarUsuario(String usuario) {
-        return repository.findByNomeUsuario(usuario);
+        return repository.findByUsuario(usuario);
+    }
+
+    public Usuario findByNomeUsuario(String usuarioRecebimentoNome) {
+        return repository.findByNomeUsuario(usuarioRecebimentoNome);
     }
 }
