@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -17,7 +18,7 @@ public class RecebidoDto {
 
     private String usuarioEnvioNome;
 
-    private Timestamp dataOperacao;
+    private String dataOperacao;
 
     private Long id;
 
@@ -48,7 +49,9 @@ public class RecebidoDto {
     public RecebidoDto(Long usuarioEnvioId, String usuarioEnvioNome, Date dataOperacao, Long id, Long idApi, String nome, String alterEgo, String urlImagem, String altura, String peso, int inteligencia, int forca, int velocidade, int resistencia, int poder, int combate) {
         this.usuarioEnvioId = usuarioEnvioId;
         this.usuarioEnvioNome = usuarioEnvioNome;
-        this.dataOperacao = Timestamp.valueOf(dataOperacao.toString());
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
+        this.dataOperacao = dateFormatter.format(dataOperacao);
         this.id = id;
         this.idApi = idApi;
         this.nome = nome;
