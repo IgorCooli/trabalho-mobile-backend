@@ -26,7 +26,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("select new br.com.cesjf.trabalhomobile.Model.Dto.UsuarioDto"
             + "(u.id, u.nomeCompleto,u.nomeUsuario) "
             + "from Usuario u "
-            + "where u.nomeUsuario like %:usuario%"
+            + "where u.nomeUsuario like %:usuario% "
+            + "or u.nomeCompleto like %:usuario%"
     )
     List<UsuarioDto> findByUsuario(String usuario);
 
