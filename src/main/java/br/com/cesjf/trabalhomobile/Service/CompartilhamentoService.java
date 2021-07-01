@@ -4,12 +4,10 @@ import br.com.cesjf.trabalhomobile.Model.Compartilhamento;
 import br.com.cesjf.trabalhomobile.Model.Dto.CompartilhamentoDto;
 import br.com.cesjf.trabalhomobile.Model.Dto.HeroiDto;
 import br.com.cesjf.trabalhomobile.Model.Dto.RecebidoDto;
-import br.com.cesjf.trabalhomobile.Model.Favorito;
 import br.com.cesjf.trabalhomobile.Model.Heroi;
 import br.com.cesjf.trabalhomobile.Model.Usuario;
 import br.com.cesjf.trabalhomobile.Repository.CompartilhamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +30,7 @@ public class CompartilhamentoService {
 
         try {
             heroi = heroiService.findByIdApi(Long.valueOf(compartilhamento.getIdHeroiApi()));
-        }catch (Exception e){
+        } catch (Exception e) {
             HeroiDto heroiDto = heroiService.buscarPorIdApi(compartilhamento.getIdHeroiApi());
             heroi = Heroi.create(heroiDto);
             heroiService.save(heroi);
@@ -41,13 +39,13 @@ public class CompartilhamentoService {
         try {
             usuarioEnvio = usuarioService.findById(compartilhamento.getUsuarioEnvioId());
             usuarioRecebimento = usuarioService.findById(compartilhamento.getUsuarioRecebimentoId());
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 
         try {
             repository.save(Compartilhamento.create(usuarioEnvio, usuarioRecebimento, heroi));
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 
@@ -55,8 +53,6 @@ public class CompartilhamentoService {
     }
 
     public List<RecebidoDto> recebidos(Long usuarioId) {
-
         return repository.recebidos(usuarioId);
-
     }
 }

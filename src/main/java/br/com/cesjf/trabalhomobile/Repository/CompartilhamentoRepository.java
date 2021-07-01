@@ -14,13 +14,16 @@ import java.util.List;
 public interface CompartilhamentoRepository extends JpaRepository<Compartilhamento, Long> {
 
     @Query("select new br.com.cesjf.trabalhomobile.Model.Dto.RecebidoDto"
-            + "(c.usuarioEnvio.id, c.dataOperação, h.id, h.idApi, h.nome, h.alterEgo, h.urlImagem, s.altura, s.peso, s.inteligencia, s.forca, s.velocidade, s.resistencia, s.poder, s.combate) "
+            + "(c.usuarioEnvio.id, u.nomeCompleto, c.dataOperação, h.id, h.idApi, h.nome, h.alterEgo, h.urlImagem, s.altura, s.peso, s.inteligencia, s.forca, s.velocidade, s.resistencia, s.poder, s.combate) "
             + "from Compartilhamento c "
             + "inner join Heroi h "
             + "on c.heroi.id = h.id "
             + "inner join Status s "
             + "on s.id = h.status.id "
+            + "inner join Usuario u "
+            + "on u.id = c.usuarioEnvio.id "
             + "where c.usuarioRecebimento.id = :usuarioId "
+            + "order by c.dataOperação desc"
     )
     List<RecebidoDto> recebidos(Long usuarioId);
 }

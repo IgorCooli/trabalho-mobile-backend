@@ -15,6 +15,8 @@ public class RecebidoDto {
 
     private Long usuarioEnvioId;
 
+    private String usuarioEnvioNome;
+
     private Timestamp dataOperacao;
 
     private Long id;
@@ -43,8 +45,9 @@ public class RecebidoDto {
 
     private int combate;
 
-    public RecebidoDto(Long usuarioEnvioId, Date dataOperacao, Long id, Long idApi, String nome, String alterEgo, String urlImagem, String altura, String peso, int inteligencia, int forca, int velocidade, int resistencia, int poder, int combate) {
+    public RecebidoDto(Long usuarioEnvioId, String usuarioEnvioNome, Date dataOperacao, Long id, Long idApi, String nome, String alterEgo, String urlImagem, String altura, String peso, int inteligencia, int forca, int velocidade, int resistencia, int poder, int combate) {
         this.usuarioEnvioId = usuarioEnvioId;
+        this.usuarioEnvioNome = usuarioEnvioNome;
         this.dataOperacao = Timestamp.valueOf(dataOperacao.toString());
         this.id = id;
         this.idApi = idApi;

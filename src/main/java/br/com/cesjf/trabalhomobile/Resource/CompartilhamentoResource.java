@@ -28,7 +28,12 @@ public class CompartilhamentoResource {
     
     @GetMapping("/recebidos/{usuarioId}")
     public ResponseEntity<List<RecebidoDto>> recebidos(@PathVariable Long usuarioId){
-        return ResponseEntity.status(HttpStatus.OK).body(service.recebidos(usuarioId));
+        List<RecebidoDto> retorno = service.recebidos(usuarioId);
+        if (retorno.isEmpty()) {
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(retorno);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(retorno);
+        }
     }
 
 }

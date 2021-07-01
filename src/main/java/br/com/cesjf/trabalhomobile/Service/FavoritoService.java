@@ -9,8 +9,8 @@ import br.com.cesjf.trabalhomobile.Repository.FavoritoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FavoritoService {
@@ -26,14 +26,14 @@ public class FavoritoService {
         Heroi heroi;
         try {
             heroi = heroiService.findByIdApi(Long.valueOf(dto.getIdHeroiApi()));
-        }catch (Exception e){
+        } catch (Exception e) {
             HeroiDto heroiDto = heroiService.buscarPorIdApi(dto.getIdHeroiApi());
             heroi = Heroi.create(heroiDto);
             heroiService.save(heroi);
         }
         try {
             repository.save(Favorito.create(usuarioService.findById(dto.getUsuarioId()), heroi));
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;
@@ -41,11 +41,10 @@ public class FavoritoService {
 
     public List<HeroiDto> listar(Long usuarioId) {
         List<Heroi> lista = repository.listar(usuarioId);
-        List<HeroiDto> retorno = new ArrayList<>();
-        lista.forEach(heroi -> {
-            retorno.add(HeroiDto.create(heroi));
-        });
-        return retorno;
+        return lista
+                .stream()
+                .map(HeroiDto::create)
+                .collect(Collectors.toList());
     }
 
     public Boolean excluir(FavoritoExcluirDto dto) {
@@ -53,7 +52,7 @@ public class FavoritoService {
         try {
             Favorito favorito = repository.buscarPorUsuarioEHeroi(dto.getHeroiId(), dto.getUsuarioId());
             repository.delete(favorito);
-        }catch (Exception e){
+        } catch (Exception e) {
             retorno = false;
         }
         return retorno;
